@@ -164,6 +164,7 @@ resource "aws_instance" "yugabyte_nodes" {
   vpc_security_group_ids = [
     aws_security_group.yugabyte.id,
     aws_security_group.yugabyte_intra.id,
+	var.custom_security_group_id,
   ]
   root_block_device {
     volume_size = var.root_volume_size
