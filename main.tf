@@ -26,12 +26,14 @@
 #########################################################
 
 terraform {
+  required_providers {
+	aws = {
+	  source  = "hashicorp/aws"
+	  version = "~> 5.45.0"
+	  region = var.region_name
+	}
+  }
   required_version = ">= 0.12"
-}
-
-provider "aws" {
-  version = "~> 3.0"
-  region  = var.region_name
 }
 
 data "aws_ami" "yugabyte_ami" {
