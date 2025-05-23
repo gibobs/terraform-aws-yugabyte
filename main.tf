@@ -36,7 +36,6 @@ terraform {
 }
 
 data "aws_ami" "yugabyte_ami" {
-  count       = length(var.aws-ami) == 0 ? 1 : 0
   most_recent = true
 
   filter {
