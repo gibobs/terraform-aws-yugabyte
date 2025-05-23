@@ -36,25 +36,24 @@ terraform {
 }
 
 data "aws_ami" "yugabyte_ami" {
+  count       = length(var.aws-ami) == 0 ? 1 : 0
   most_recent = true
-  owners      = ["aws-marketplace"]
 
   filter {
-    name = "name"
+    name   = "name"
+    values = ["AlmaLinux OS 8.8.*"]
+  }
 
-    values = [
-      "CentOS Linux 7 x86_64 HVM EBS *",
-    ]
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
   }
   filter {
-    name   = "architecture"
+    name = "architecture"
     values = ["x86_64"]
   }
 
-  filter {
-    name   = "root-device-type"
-    values = ["ebs"]
-  }
+  owners      = ["aws-marketplace"]
 }
 
 #########################################################
